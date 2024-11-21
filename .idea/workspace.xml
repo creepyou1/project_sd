@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="a">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ClientInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Produto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Resorces/users.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Server/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
+    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="Teste de ler utilizadores de ficheiros">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732193355148</updated>
-      <workItem from="1732193356165" duration="2116000" />
+      <workItem from="1732193356165" duration="3393000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -93,7 +88,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732193505047</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Teste de ler utilizadores de ficheiros">
+      <option name="closed" value="true" />
+      <created>1732195620259</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732195620259</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +104,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="Teste de ler utilizadores de ficheiros" />
+    <option name="LAST_COMMIT_MESSAGE" value="Teste de ler utilizadores de ficheiros" />
   </component>
 </project>

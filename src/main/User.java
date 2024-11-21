@@ -1,8 +1,8 @@
-package main.Server;
+package main;
 
-public class User {
-    String username;
-    String password;
+public class User extends  {
+    public String username;
+    public String password;
 
     public User(String username, String password) {
         this.username = username;

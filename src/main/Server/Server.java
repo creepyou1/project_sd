@@ -2,9 +2,14 @@ package main.Server;
 
 
 import main.ServerInterface;
+import main.User;
+
 import java.io.*;
+import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +18,7 @@ import java.util.List;
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
     public static List<User> users;
+    public static List<User> logged;
     public final static String usersFilePath = System.getProperty("user.dir") + "\\src\\main\\Resorces\\users.txt";
 
     protected Server() throws RemoteException {
@@ -38,10 +44,33 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     }
 
+    @Override
+    public boolean login(String username, String password) throws RemoteException {
+        for (User user : users) {
+            if (user.username.equals(username) && user.password.equals(password)) {
+                logged.add(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         readusers();
-        for (User user : users)
-            System.out.println("Username : " + user.username + "/Password : " + user.password);
+        try {
+            Server server = new Server();
+            LocateRegistry.createRegistry(4004);
+            Naming.rebind("rmi://localhost:6666/server", server);
+
+            System.out.println("Main : Server pronto a receber clientes");
+
+
+
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

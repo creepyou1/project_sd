@@ -1,4 +1,8 @@
 package main;
 
-public interface ClientInterface {
+import java.rmi.Remote;
+
+public interface ClientInterface extends Remote {
+
+
 }

@@ -1,5 +1,6 @@
 package main;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Produto {
@@ -7,9 +8,9 @@ public class Produto {
     float price;
     String store;
     String user_insert;
-    Date date_inserted;
+    LocalDate date_inserted;
 
-    public Produto(String name, float price, String store, String user_insert, Date date_inserted) {
+    public Produto(String name, float price, String store, String user_insert, LocalDate date_inserted) {
         this.name = name;
         this.price = price;
         this.store = store;

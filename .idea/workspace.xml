@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira implementação de sistema login pelo rmi [não terminado]">
-      <change afterPath="$PROJECT_DIR$/src/main/Resorces/Colors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Resorces/products.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Server/List_User.java" afterDir="false" />
+    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira implementação de sistema login pelo rmi [terminado]">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Produto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +89,8 @@
       <workItem from="1732193356165" duration="3427000" />
       <workItem from="1732271196347" duration="5302000" />
       <workItem from="1732276613066" duration="822000" />
+      <workItem from="1732279507095" duration="1113000" />
+      <workItem from="1732362215546" duration="636000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -119,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732196815873</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="primeira implementação de sistema login pelo rmi [terminado]">
+      <option name="closed" value="true" />
+      <created>1732279733420</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732279733420</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +134,7 @@
     <MESSAGE value="a" />
     <MESSAGE value="Teste de ler utilizadores de ficheiros" />
     <MESSAGE value="primeira implementação de sistema login pelo rmi [não terminado]" />
-    <option name="LAST_COMMIT_MESSAGE" value="primeira implementação de sistema login pelo rmi [não terminado]" />
+    <MESSAGE value="primeira implementação de sistema login pelo rmi [terminado]" />
+    <option name="LAST_COMMIT_MESSAGE" value="primeira implementação de sistema login pelo rmi [terminado]" />
   </component>
 </project>

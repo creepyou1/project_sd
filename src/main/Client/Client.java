@@ -14,8 +14,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Client extends UnicastRemoteObject implements ClientInterface {
 
+    boolean update = false;
+
     protected Client() throws RemoteException {
         super();
+    }
+
+    public void updated_price(boolean update){
+        this.update = update;
     }
 
     public static void main(String[] args) {
@@ -39,6 +45,22 @@ public class Client extends UnicastRemoteObject implements ClientInterface {
             }
             else
                 System.out.println("Logged in successfully.");
+
+
+            while(true){
+                System.out.println("=======================================");
+                System.out.println("1-Adicionar Produtos");
+                System.out.println("2-Remover Produtos");
+                System.out.println("3-Atualizar Produtos");
+                System.out.println("4-Ver Produtos");
+                System.out.println("5-Sair programa");
+                System.out.println("=======================================");
+                String option = br.readLine();
+
+                switch(option){
+                    case "1" :
+                }
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);

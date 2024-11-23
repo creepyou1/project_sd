@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
@@ -25,6 +26,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public static List<Produto> produtos;
     public final static String usersFilePath = System.getProperty("user.dir") + "\\src\\main\\Resorces\\users.txt";
     public final static String productsFilePath = System.getProperty("user.dir") + "\\src\\main\\Resorces\\products.txt";
+    private static Semaphore semaphore = new Semaphore(1);
 
     protected Server() throws RemoteException {
         super();
@@ -46,7 +48,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             }
             while ( (line = produ.readLine()) != null ){
                 String[] product = line.split(";");
-                produtos.add(new Produto(product[0],Float.parseFloat(product[1]),product[2],product[3], LocalDate.parse(product[4])) );
+                produtos.add(new Produto(Integer.parseInt(product[0]),product[1],Float.parseFloat(product[2]),product[3],product[4], LocalDate.parse(product[5])) );
             }
         } catch (FileNotFoundException e) {
             System.err.println("Main : Ficheiro não encontrado, use user1/user1 para teste do programa");
@@ -56,7 +58,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
 
     }
-
     @Override
     public boolean login(String username, String password, ClientInterface clientInterface) throws RemoteException {
         for (List_User possible : users) {
@@ -68,6 +69,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         System.out.println("Main : User failed the log in terminating connection");
         return false;
+    }
+
+    public int register_product(String name,float price,String store,String user){
+        Produto p = new Produto()
+
+        return -1;
     }
 
     public static void main(String[] args) {

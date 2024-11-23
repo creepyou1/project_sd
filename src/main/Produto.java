@@ -1,7 +1,6 @@
 package main;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Produto {
     int id;
@@ -18,5 +17,33 @@ public class Produto {
         this.store = store;
         this.user_insert = user_insert;
         this.date_inserted = date_inserted;
+    }
+
+    public LocalDate getDate_inserted() {
+        return date_inserted;
+    }
+
+    public String getUser_insert() {
+        return user_insert;
+    }
+
+    public String getStore() {
+        return store;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String toString() {
+        return "Produto :" + name + "\n" + "Preço :" + price  + "€" + "\n" + "Store :" + store + "\n" + "User Insert :" + user_insert + "\n" + "Date Insert :" + date_inserted + "\n";
     }
 }

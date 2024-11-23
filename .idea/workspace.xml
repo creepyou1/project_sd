@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira implementação de sistema login pelo rmi [terminado]">
+    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira tentatica implementação do sistema de registo de produtos [por continuar]">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resorces/products.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resorces/products.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +73,18 @@
       <recent name="D:\projeto_sd2\src\main\Server" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="main.Client.Client" />
+      <module name="projeto_sd2" />
+      <selectedOptions>
+        <option name="environmentVariables" visible="false" />
+      </selectedOptions>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,7 +105,8 @@
       <workItem from="1732271196347" duration="5302000" />
       <workItem from="1732276613066" duration="822000" />
       <workItem from="1732279507095" duration="1113000" />
-      <workItem from="1732362215546" duration="636000" />
+      <workItem from="1732362215546" duration="936000" />
+      <workItem from="1732370257065" duration="4535000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -124,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732279733420</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="primeira tentatica implementação do sistema de registo de produtos [por continuar]">
+      <option name="closed" value="true" />
+      <created>1732363101391</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732363101393</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +159,7 @@
     <MESSAGE value="Teste de ler utilizadores de ficheiros" />
     <MESSAGE value="primeira implementação de sistema login pelo rmi [não terminado]" />
     <MESSAGE value="primeira implementação de sistema login pelo rmi [terminado]" />
-    <option name="LAST_COMMIT_MESSAGE" value="primeira implementação de sistema login pelo rmi [terminado]" />
+    <MESSAGE value="primeira tentatica implementação do sistema de registo de produtos [por continuar]" />
+    <option name="LAST_COMMIT_MESSAGE" value="primeira tentatica implementação do sistema de registo de produtos [por continuar]" />
   </component>
 </project>

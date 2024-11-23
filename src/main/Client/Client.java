@@ -24,6 +24,10 @@ public class Client extends UnicastRemoteObject implements ClientInterface {
         this.update = update;
     }
 
+    public void printonclient(String messagefromserver){
+        System.out.println(messagefromserver);
+    }
+
     public static void main(String[] args) {
         Colors colors = new Colors();
 
@@ -52,13 +56,31 @@ public class Client extends UnicastRemoteObject implements ClientInterface {
                 System.out.println("1-Adicionar Produtos");
                 System.out.println("2-Remover Produtos");
                 System.out.println("3-Atualizar Produtos");
-                System.out.println("4-Ver Produtos");
+                System.out.println("4-Listar Produtos");
                 System.out.println("5-Sair programa");
                 System.out.println("=======================================");
                 String option = br.readLine();
 
                 switch(option){
-                    case "1" :
+                    case "1" : {
+                        System.out.println("=======================================");
+                        System.out.println(colors.change_green() + "Nome do produto : " + colors.change_back());
+                        String nome = br.readLine();
+                        System.out.println(colors.change_green() + "Preço do produto : " + colors.change_back());
+                        Float price = Float.parseFloat(br.readLine());
+                        System.out.println(colors.change_green() + "Loja do produto : " + colors.change_back());
+                        String store = br.readLine();
+                        System.out.println("=======================================");
+                        int resposta = serverInterface.register_product(nome,price,store,username);
+
+                        if(resposta == 1){
+                            System.out.println("Produto registado com sucesso.");
+                        }else{
+                            System.out.println("Produto já existe na loja");
+                        }
+                        break;
+                    }
+                    case "4" : serverInterface.list_products(username);
                 }
             }
 

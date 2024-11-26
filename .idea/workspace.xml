@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira tentatica implementação do sistema de registo de produtos [por continuar]">
+    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol">
+      <change afterPath="$PROJECT_DIR$/src/main/Server/Resorces/products.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/untils/InputValidation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resorces/products.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resorces/products.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resorces/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Resorces/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resorces/products.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resorces/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Resorces/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,10 +72,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projeto_sd2\src\main\untils" />
       <recent name="D:\projeto_sd2\src\main\Server" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="main.Client.Client" />
       <module name="projeto_sd2" />
@@ -84,6 +87,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Server.Server" />
+      <module name="projeto_sd2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -106,7 +120,11 @@
       <workItem from="1732276613066" duration="822000" />
       <workItem from="1732279507095" duration="1113000" />
       <workItem from="1732362215546" duration="936000" />
-      <workItem from="1732370257065" duration="4535000" />
+      <workItem from="1732370257065" duration="4569000" />
+      <workItem from="1732395073874" duration="2188000" />
+      <workItem from="1732455287487" duration="112000" />
+      <workItem from="1732533086075" duration="5880000" />
+      <workItem from="1732619598072" duration="250000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -148,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732363101393</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol">
+      <option name="closed" value="true" />
+      <created>1732379962979</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732379962979</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +186,17 @@
     <MESSAGE value="primeira implementação de sistema login pelo rmi [não terminado]" />
     <MESSAGE value="primeira implementação de sistema login pelo rmi [terminado]" />
     <MESSAGE value="primeira tentatica implementação do sistema de registo de produtos [por continuar]" />
-    <option name="LAST_COMMIT_MESSAGE" value="primeira tentatica implementação do sistema de registo de produtos [por continuar]" />
+    <MESSAGE value="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

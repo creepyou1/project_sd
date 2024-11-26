@@ -25,8 +25,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public static List<List_User> users;
     public static List<User> logged;
     public static List<Produto> produtos;
-    public final static String usersFilePath = System.getProperty("user.dir") + "\\src\\main\\Resorces\\users.txt";
-    public final static String productsFilePath = System.getProperty("user.dir") + "\\src\\main\\Resorces\\products.txt";
+    public final static String usersFilePath = System.getProperty("user.dir") + "\\src\\main\\Server\\Resorces\\users.txt";
+    public final static String productsFilePath = System.getProperty("user.dir") + "\\src\\main\\Server\\Resorces\\products.txt";
     private static Semaphore semaphore = new Semaphore(1);
     private static int prod_ids = 1;
 
@@ -51,7 +51,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             while ( (line = produ.readLine()) != null ){
                 String[] product = line.split(";");
                 produtos.add(new Produto(Integer.parseInt(product[0]),product[1],Float.parseFloat(product[2]),product[3],product[4], LocalDate.parse(product[5])) );
-                prod_ids++;
+                prod_ids = Integer.parseInt(product[0]) + 1;
             }
         } catch (FileNotFoundException e) {
             System.err.println("Main : Ficheiro não encontrado, use user1/user1 para teste do programa");
@@ -76,7 +76,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     public int register_product(String name,float price,String store,String user){
         boolean stop = false;
-        List<String> prod_list = new ArrayList<>();
 
         try {
             semaphore.acquire();
@@ -87,14 +86,16 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                 }
             }
 
+            List<String> lista = new ArrayList<>();
             if (!stop){
                 Produto p = new Produto(prod_ids,name,price,store,user,LocalDate.now());
-                String ps = String.valueOf(prod_ids) + ";" + name + ";" + price + ";" + store + ";" + user + ";" + LocalDate.now();
-                prod_list.add(ps);
                 produtos.add(p);
                 prod_ids++;
 
-                Files.write(Path.of(productsFilePath),prod_list,StandardCharsets.UTF_8);
+                for (Produto p1 : produtos)
+                    lista.add(String.valueOf(p1.getId()) + ";" + p1.getName() + ";" + String.valueOf(p1.getPrice()) + ";" + p1.getStore() + ";"
+                            + p1.getUser_insert() + ";" + String.valueOf(p1.getDate_inserted()));
+                Files.write(Path.of(productsFilePath),lista,StandardCharsets.UTF_8);
                 semaphore.release();
                 return 1;
             }
@@ -107,18 +108,136 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return 0;
     }
 
-    public void list_products(String username) {
+    public int remove_product(String name,String user){
+        int index = 0;
+        boolean success = false;
+        try {
+            semaphore.acquire();
+            for (Produto prod : produtos) {
+                if (prod.getName().equalsIgnoreCase(name)) {
+                    produtos.remove(index);
+                    success = true;
+                    break;
+                }
+                index++;
+            }
+
+            List<String> lista = new ArrayList<>();
+            for (Produto prod : produtos) {
+                lista.add(String.valueOf(prod.getId()) + ";" + prod.getName() + ";" + String.valueOf(prod.getPrice()) + ";" + prod.getStore() + ";"
+                        + prod.getUser_insert() + ";" + prod.getDate_inserted());
+            }
+            try {
+                Files.write(Path.of(productsFilePath), lista, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                System.err.println("Main : Erro ao escrever no ficheiro");
+            }
+
+            semaphore.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (success)
+            return 1;
+        return 0;
+    }
+
+    public int update_product(String update_product,String name,float price,String store,String user){
+        boolean success = false;
+
+        try {
+            semaphore.acquire();
+
+            for (Produto prod : produtos){
+                if (prod.getName().equalsIgnoreCase(update_product)) {
+                    prod.update(name,price,store,user,LocalDate.now());
+                    success = true;
+                    break;
+                }
+            }
+            List<String> lista = new ArrayList<>();
+            for (Produto prod : produtos) {
+                lista.add(String.valueOf(prod.getId()) + ";" + prod.getName() + ";" + String.valueOf(prod.getPrice()) + ";" + prod.getStore() + ";"
+                        + prod.getUser_insert() + ";" + prod.getDate_inserted());
+            }
+            Files.write(Path.of(productsFilePath), lista, StandardCharsets.UTF_8);
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        semaphore.release();
+        if (success)
+            return 1;
+
+        return 0;
+    }
+
+    public void list_products_all(String username) {
         User u = null;
 
         for (User user : logged)
-            if(user.username.equals(username))
+            if(user.username.equals(username)) {
                 u = user;
-
+                break;
+            }
         for (Produto prod : produtos){
             try {
                 u.clientInterface.printonclient(prod.toString());
             } catch (RemoteException e) {
-                throw new RuntimeException(e);
+                System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
+            }
+        }
+    }
+
+    public void list_products_by_name(String username, String name){
+        User u = null;
+        for (User user : logged){
+            if (user.username.equals(username)) {
+                u = user;
+                break;
+            }
+        }
+        for (Produto p : produtos){
+            String[] name_slipt = p.getName().split(" ");
+
+            for (int i = 0; i < name_slipt.length; i++) {
+                if (name_slipt[i].equalsIgnoreCase(name)) {
+                    try {
+                        u.clientInterface.printonclient(p.toString());
+                        break;
+                    } catch (RemoteException e) {
+                        System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
+                    }
+                }
+            }
+        }
+    }
+
+    public void list_products_by_store(String username, String store){
+        User u = null;
+        for (User user : logged){
+            if (user.username.equals(username)) {
+                u = user;
+                break;
+            }
+        }
+        for (Produto p : produtos)
+            if (p.getStore().equalsIgnoreCase(store)) {
+                try {
+                    u.clientInterface.printonclient(p.toString());
+                } catch (RemoteException e) {
+                    System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
+                }
+            }
+    }
+
+    public void userexit(String username){
+        System.out.println("Main : User " + username + " saiu do server");
+        for (User user : logged){
+            if (user.username.equals(username)) {
+                logged.remove(user);
             }
         }
     }
@@ -132,9 +251,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             System.out.println("Main : Server pronto a receber clientes");
 
-            while(true){
-
-            }
+            while(true){}                                                       //Manter o servidor em loop para poder aceitar utilizadores
 
         } catch (RemoteException e) {
             throw new RuntimeException(e);

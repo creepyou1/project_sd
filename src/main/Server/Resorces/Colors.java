@@ -1,4 +1,4 @@
-package main.Resorces;
+package main.Server.Resorces;
 
 public class Colors {
     String RESET = "\u001B[0m";

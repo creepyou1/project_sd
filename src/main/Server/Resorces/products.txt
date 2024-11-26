@@ -1,0 +1,2 @@
+1;Leite Meio-Gordo;10.0;Continente;user1;2024-11-25
+2;Leite Magro;2.0;Continente;user1;2024-11-25

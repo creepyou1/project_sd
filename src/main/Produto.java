@@ -43,6 +43,13 @@ public class Produto {
         return id;
     }
 
+    public void update(String name,Float price,String store,String user_insert,LocalDate date_inserted) {
+        this.name = name;
+        this.price = price;
+        this.store = store;
+        this.user_insert = user_insert;
+        this.date_inserted = date_inserted;
+    }
     public String toString() {
         return "Produto :" + name + "\n" + "Preço :" + price  + "€" + "\n" + "Store :" + store + "\n" + "User Insert :" + user_insert + "\n" + "Date Insert :" + date_inserted + "\n";
     }

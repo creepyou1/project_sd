@@ -47,11 +47,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             while ((line = br.readLine()) != null) {
                 String[] user = line.split(";");
                 users.add(new List_User(user[0],user[1]));
+                System.out.println("Main : Ficheiro de utilizadores lido com sucesso e todos estão registados no sistema");
             }
             while ( (line = produ.readLine()) != null ){
                 String[] product = line.split(";");
                 produtos.add(new Produto(Integer.parseInt(product[0]),product[1],Float.parseFloat(product[2]),product[3],product[4], LocalDate.parse(product[5])) );
                 prod_ids = Integer.parseInt(product[0]) + 1;
+                System.out.println("Main : Ficheiro dos produtos lido com sucesso e todos estão registados no sistema");
             }
         } catch (FileNotFoundException e) {
             System.err.println("Main : Ficheiro não encontrado, use user1/user1 para teste do programa");
@@ -66,11 +68,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         for (List_User possible : users) {                                                           // Ve-se na lista dos users existentes se o que esta a tentar entrar existe
             if (possible.username.equals(username) && possible.password.equals(password)) {          // Se o username e password do cliente estiverem corretas
                 logged.add(new User(username,password,clientInterface));                             // Adiciona-se este a lista dos users logados
-                System.out.println("Main : User " + username + " logged in");                        // Retorna-se true para o cliente continuar o seu processo
+                System.out.println("Main : User " + username + " fez login com sucesso");                        // Retorna-se true para o cliente continuar o seu processo
                 return true;
             }
         }
-        System.out.println("Main : User failed the log in terminating connection");
+        System.out.println("Main : Falhou a sua tentativa de login terminando sessão");
         return false;
     }
 
@@ -89,6 +91,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             List<String> lista = new ArrayList<>();
             if (!stop){
                 Produto p = new Produto(prod_ids,name,price,store,user,LocalDate.now());
+                System.out.println("Main : O cliente " + user + "registou com sucesso o seguinte produto " + p.toString());
                 produtos.add(p);
                 prod_ids++;
 
@@ -101,21 +104,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             }
         } catch (InterruptedException e) {
             System.err.println("Main : Erro ao obter o semafero");
+            semaphore.release();
         } catch (IOException e) {
             System.err.println("Main : Erro ao escrever no ficheiro");
+            semaphore.release();
         }
-        semaphore.release();
         return 0;
     }
 
-    public int remove_product(String name,String user){
+    public int remove_product(String name,String user,String store){
         int index = 0;
         boolean success = false;
         try {
             semaphore.acquire();
             for (Produto prod : produtos) {
-                if (prod.getName().equalsIgnoreCase(name)) {
+                if (prod.getName().equalsIgnoreCase(name) && prod.getStore().equalsIgnoreCase(store)) {
                     produtos.remove(index);
+                    System.out.println("Main : O cliente " + user + " removeu o seguinte produto " + prod.toString());
                     success = true;
                     break;
                 }
@@ -185,14 +190,16 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         for (Produto prod : produtos){
             try {
                 u.clientInterface.printonclient(prod.toString());
+                System.out.println("Main : Enviada a lista de todos os produtos ao utilizador " + username);
             } catch (RemoteException e) {
                 System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
             }
         }
     }
 
-    public void list_products_by_name(String username, String name){
+    public int list_products_by_name(String username, String name){
         User u = null;
+        boolean success = false;
         for (User user : logged){
             if (user.username.equals(username)) {
                 u = user;
@@ -204,19 +211,26 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             for (int i = 0; i < name_slipt.length; i++) {
                 if (name_slipt[i].equalsIgnoreCase(name)) {
+                    success = true;
                     try {
                         u.clientInterface.printonclient(p.toString());
-                        break;
+                        System.out.println("Main : Enviado a lista de todos os produtos com o nome " + name + " ao cliente " + username);
                     } catch (RemoteException e) {
                         System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
                     }
                 }
             }
+
+
         }
+        if (success)
+            return 1;
+        return 0;
     }
 
-    public void list_products_by_store(String username, String store){
+    public int list_products_by_store(String username, String store){
         User u = null;
+        boolean success = false;
         for (User user : logged){
             if (user.username.equals(username)) {
                 u = user;
@@ -225,12 +239,18 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         for (Produto p : produtos)
             if (p.getStore().equalsIgnoreCase(store)) {
+                success = true;
                 try {
                     u.clientInterface.printonclient(p.toString());
+                    System.out.println("Main : Enviada lista de todos os produtos para a loja " + store + " ao cliente " +  username);
+                    break;
                 } catch (RemoteException e) {
                     System.err.println("Main : Erro ao enviar mensagem ao cliente " + username);
                 }
             }
+        if (success)
+            return 1;
+        return 0;
     }
 
     public void userexit(String username){
@@ -240,6 +260,67 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                 logged.remove(user);
             }
         }
+    }
+
+    public int update_product(Produto p, String user,String[] select_product,List<Integer> changes){
+
+        Produto prod = null;
+        boolean success = false;
+        try {
+            semaphore.acquire();
+            for (Produto produto : produtos)
+                if (select_product[0].equalsIgnoreCase(produto.getName()) && select_product[1].equalsIgnoreCase(produto.getStore())) {// Select 0 equivale ao nome do produto e 1 á loja do produto, isto apenas é usado para selecionar o produto da lista
+                    prod = produto;
+                    success = true;
+                }
+
+            produtos.remove(prod);
+
+            prod.update(p.getName(),p.getPrice(),p.getStore(),user,p.getDate_inserted());
+            produtos.add(prod);
+
+            List<String> lista = new ArrayList<>();
+
+            for (Produto p1 : produtos)
+                lista.add(String.valueOf(p1.getId()) + ";" + p1.getName() + ";" + String.valueOf(p1.getPrice()) + ";" + p1.getStore() + ";"
+                        + p1.getUser_insert() + ";" + String.valueOf(p1.getDate_inserted()));
+            Files.write(Path.of(productsFilePath),lista,StandardCharsets.UTF_8);
+            semaphore.release();
+
+            //Todas as mudanças no produto seram relatadas a todos os utilizadores (menos ao que fez a mudança) para isso define-se o seguinte codigo
+            //para cada campo
+            //1-name ; 2-price ; 3-store ; 4- user ; 5- date
+            List<String> Changes = new ArrayList<>();
+            for (int a : changes)
+                switch (a){
+                case 1: Changes.add("Nome alterado para : " + p.getName()); break;
+                case 2: Changes.add("Preço alterado para : " + p.getPrice()); break;
+                case 3: Changes.add("Loja alterado para : " + p.getStore()); break;
+                }
+            Changes.add("Alteração realizada pelo o utilizador : " + user);
+
+            for (User u : logged) {
+                u.clientInterface.updated_product(Changes);
+                System.out.println("Main : Mensagem enviada com sucesso ao cliente " + u.username);
+            }
+            return 1;
+        } catch (InterruptedException e) {
+            System.err.println("Main : Erro ao obter o semafero");
+            semaphore.release();
+        } catch (IOException e) {
+            System.err.println("Main : Erro ao escrever no ficheiro dos produtos");
+            semaphore.release();
+        }
+        return 0;
+    }
+
+    public Produto send_product(String name,String store){
+        Produto p = null;
+
+        for (Produto prod : produtos)
+            if (prod.getName().equals(name) && prod.getStore().equals(store))
+                p = prod;
+        return p;
     }
 
     public static void main(String[] args) {

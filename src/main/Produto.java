@@ -1,8 +1,9 @@
 package main;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Produto {
+public class Produto implements Serializable {
     int id;
     String name;
     float price;
@@ -43,7 +44,31 @@ public class Produto {
         return id;
     }
 
-    public void update(String name,Float price,String store,String user_insert,LocalDate date_inserted) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setStore(String store) {
+        this.store = store;
+    }
+
+    public void setUser_insert(String user_insert) {
+        this.user_insert = user_insert;
+    }
+
+    public void setDate_inserted(LocalDate date_inserted) {
+        this.date_inserted = date_inserted;
+    }
+
+    public void update(String name, Float price, String store, String user_insert, LocalDate date_inserted) {
         this.name = name;
         this.price = price;
         this.store = store;

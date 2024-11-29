@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol">
-      <change afterPath="$PROJECT_DIR$/src/main/Server/Resorces/products.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/untils/InputValidation.java" afterDir="false" />
+    <list default="true" id="e571a2a4-ee3a-49e5-b30b-a0eef366690c" name="Changes" comment="programa quase terminado lol">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ClientInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resorces/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Resorces/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resorces/products.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resorces/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Resorces/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerInterface.java" afterDir="false" />
     </list>
@@ -125,6 +121,11 @@
       <workItem from="1732455287487" duration="112000" />
       <workItem from="1732533086075" duration="5880000" />
       <workItem from="1732619598072" duration="250000" />
+      <workItem from="1732619942996" duration="34000" />
+      <workItem from="1732798184697" duration="3970000" />
+      <workItem from="1732802678407" duration="5000" />
+      <workItem from="1732804171859" duration="190000" />
+      <workItem from="1732892266049" duration="2762000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -174,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732379962979</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="programa quase terminado lol">
+      <option name="closed" value="true" />
+      <created>1732619966881</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732619966881</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +196,8 @@
     <MESSAGE value="primeira implementação de sistema login pelo rmi [terminado]" />
     <MESSAGE value="primeira tentatica implementação do sistema de registo de produtos [por continuar]" />
     <MESSAGE value="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="primeira tentatica implementação do sistema de registo de produtos acabado, erro ao guardar nos ficheiros no entanto lol" />
+    <MESSAGE value="programa quase terminado lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="programa quase terminado lol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

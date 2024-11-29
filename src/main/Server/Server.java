@@ -335,9 +335,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             while(true){}                                                       //Manter o servidor em loop para poder aceitar utilizadores
 
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            System.err.println("Main : Erro ao executar uma chamada rmi");
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Main : Erro ao criar o url do servirdor");
         }
 
     }

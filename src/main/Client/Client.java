@@ -161,74 +161,167 @@ public class Client extends UnicastRemoteObject implements ClientInterface {
                         break;
                     }
                     case 3: {
+                        boolean sucess = false;
+                        while(true) {
+                            System.out.println("=======================================");
+                            System.out.println("Metodo de procura preferido?\n1-Todos os produtos\n2-Procurar por nome\n3-Procurar por loja");
+                            System.out.println("=======================================");
+                            option = InputValidation.validateIntBetween(sc, "->", 1, 3);
+                            if (option == 1) {
+                                serverInterface.list_products_all(username);
+                                System.out.println("Nome do produto : ");
+                                String name = sc.nextLine();
+                                System.out.println("Nome da Loja :");
+                                String store = sc.nextLine();
+                                Produto produto = serverInterface.send_product(name, store);
+                                if (produto != null) {
+                                    String[] selected_product = {name, store};
+                                    List<Integer> options = new ArrayList<>();
+                                    while (true) {
+                                        System.out.println("O que pretende alterar?\n1-Nome\n2-Preço\n3-Loja\n4-Sair");
+                                        option = InputValidation.validateIntBetween(sc, "->", 1, 4);
 
-                        System.out.println("=======================================");
-                        System.out.println("Metodo de procura preferido?\n1-Todos os produtos\n2-Procurar por nome\n3-Procurar por loja");
-                        System.out.println("=======================================");
-                        option = InputValidation.validateIntBetween(sc, "->", 1, 3);
-                        if (option == 1) {
-                            serverInterface.list_products_all(username);
-                            System.out.println("Nome do produto : ");
-                            String name = sc.nextLine();
-                            System.out.println("Nome da Loja :");
-                            String store = sc.nextLine();
-                            String[] selected_product = {name,store};
-                            Produto produto = serverInterface.send_product(name,store);
-                            if (produto != null) {
-                                List<Integer> options = new ArrayList<>();
-                                while (true){
-                                    System.out.println("O que pretende alterar?\n1-Nome\n2-Preço\n3-Loja\n4-Sair");
-                                    option = InputValidation.validateIntBetween(sc, "->", 1, 4);
+                                        if (option == 1) {
+                                            System.out.println("Nome do produto : ");
+                                            produto.setName(sc.nextLine());
+                                        } else if (option == 2) {
+                                            System.out.println("Preço do produto : ");
+                                            produto.setPrice(sc.nextFloat());
+                                        } else if (option == 3) {
+                                            System.out.println("Loja do produto : ");
+                                            produto.setStore(sc.nextLine());
+                                        } else if (option == 4) {
+                                            break;
+                                        }
 
-                                    if (option == 1){
-                                        System.out.println("Nome do produto : ");
-                                        produto.setName(sc.nextLine());
-                                    }else if (option == 2){
-                                        System.out.println("Preço do produto : ");
-                                        produto.setPrice(sc.nextFloat());
-                                    }else if (option == 3){
-                                        System.out.println("Loja do produto : ");
-                                        produto.setStore(sc.nextLine());
-                                    } else if (option == 4) {
-                                        break;
+                                        boolean stop = false;
+                                        for (Integer change : options) {
+                                            if (change == option)
+                                                stop = true;
+                                        }
+
+                                        if (!stop)
+                                            options.add(option);
                                     }
-
-                                    boolean stop = false;
-                                    for (Integer change : options) {
-                                        if (change == option)
-                                            stop = true;
-                                    }
-
-                                    if (!stop)
-                                        options.add(option);
+                                    serverInterface.update_product(produto, username, selected_product, options);
                                 }
-                                serverInterface.update_product(produto,username,selected_product,options);
-                            }
+                                else
+                                    System.out.println("Produto não encontrado");
 
+                            }
+                            if (option == 2) {
+                                System.out.println("Produto : ");
+                                String name = sc.nextLine();
+                                int resposta = serverInterface.list_products_by_name(username, name);
+                                if (resposta == 1) {
+                                    System.out.println("Nome da loja :");
+                                    String store = sc.nextLine();
+                                    Produto produto = serverInterface.send_product(name, store);
+                                    if (produto != null) {
+                                        String[] selected_product = {name, store};
+
+                                        List<Integer> options = new ArrayList<>();
+                                        while (true) {
+                                            System.out.println("O que pretende alterar?\n1-Nome\n2-Preço\n3-Loja\n4-Sair");
+                                            option = InputValidation.validateIntBetween(sc, "->", 1, 4);
+
+                                            if (option == 1) {
+                                                System.out.println("Nome do produto : ");
+                                                produto.setName(sc.nextLine());
+                                            } else if (option == 2) {
+                                                System.out.println("Preço do produto : ");
+                                                produto.setPrice(sc.nextFloat());
+                                            } else if (option == 3) {
+                                                System.out.println("Loja do produto : ");
+                                                produto.setStore(sc.nextLine());
+                                            } else if (option == 4) {
+                                                break;
+                                            }
+
+                                            boolean stop = false;
+                                            for (Integer change : options) {
+                                                if (change == option)
+                                                    stop = true;
+                                            }
+
+                                            if (!stop)
+                                                options.add(option);
+                                        }
+                                        serverInterface.update_product(produto, username, selected_product, options);
+                                    }
+                                }
+                            }
+                            if (option == 3) {
+                                System.out.println("Loja : ");
+                                String store = sc.nextLine();
+                                int resposta = serverInterface.list_products_by_store(username, store);
+                                if (resposta == 1) {
+                                    System.out.println("Nome do produto :");
+                                    String name = sc.nextLine();
+                                    Produto produto = serverInterface.send_product(name, store);
+                                    if (produto != null) {
+                                        String[] selected_product = {name, store};
+
+                                        List<Integer> options = new ArrayList<>();
+                                        while (true) {
+                                            System.out.println("O que pretende alterar?\n1-Nome\n2-Preço\n3-Loja\n4-Sair");
+                                            option = InputValidation.validateIntBetween(sc, "->", 1, 4);
+
+                                            if (option == 1) {
+                                                System.out.println("Nome do produto : ");
+                                                produto.setName(sc.nextLine());
+                                            } else if (option == 2) {
+                                                System.out.println("Preço do produto : ");
+                                                produto.setPrice(sc.nextFloat());
+                                            } else if (option == 3) {
+                                                System.out.println("Loja do produto : ");
+                                                produto.setStore(sc.nextLine());
+                                            } else if (option == 4) {
+                                                break;
+                                            }
+
+                                            boolean stop = false;
+                                            for (Integer change : options) {
+                                                if (change == option)
+                                                    stop = true;
+                                            }
+
+                                            if (!stop)
+                                                options.add(option);
+                                        }
+                                        serverInterface.update_product(produto, username, selected_product, options);
+                                    }
+                                }
+                            }
+                            if (option == 4)
+                                break;
                         }
                         break;
                     }
                     case 4: {
-                        System.out.println("=======================================");
-                        System.out.println("1-Todos os produtos");
-                        System.out.println("2-Procurar por nome");
-                        System.out.println("3-Procurar por loja");
-                        System.out.println("4-Retornar");
-                        System.out.println("=======================================");
-                        option = InputValidation.validateIntBetween(sc, "->", 1, 4);
+                        while (true) {
+                            System.out.println("=======================================");
+                            System.out.println("1-Todos os produtos");
+                            System.out.println("2-Procurar por nome");
+                            System.out.println("3-Procurar por loja");
+                            System.out.println("4-Retornar");
+                            System.out.println("=======================================");
+                            option = InputValidation.validateIntBetween(sc, "->", 1, 4);
 
-                        if (option == 1)
-                            serverInterface.list_products_all(username);
-                        else if (option == 2) {
-                            System.out.println("Nome do produto : ");
-                            String name = sc.nextLine();
-                            serverInterface.list_products_by_name(username, name);
-                        } else if (option == 3) {
-                            System.out.println("Nome da loja : ");
-                            String store = sc.nextLine();
-                            serverInterface.list_products_by_store(username, store);
+                            if (option == 1)
+                                serverInterface.list_products_all(username);
+                            else if (option == 2) {
+                                System.out.println("Nome do produto : ");
+                                String name = sc.nextLine();
+                                serverInterface.list_products_by_name(username, name);
+                            } else if (option == 3) {
+                                System.out.println("Nome da loja : ");
+                                String store = sc.nextLine();
+                                serverInterface.list_products_by_store(username, store);
+                            }else
+                                break;
+
                         }
-
                         break;
                     }
                     case 5:
